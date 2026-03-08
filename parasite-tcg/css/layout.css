@@ -1,0 +1,307 @@
+/* ════════════════════════════════════════════════════
+   layout.css — Header, game grid, player areas,
+                battlefield, field rows
+   ════════════════════════════════════════════════════ */
+
+/* ── HEADER ──────────────────────────────────────── */
+#header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  position: relative;
+  z-index: 10;
+}
+
+#header .logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 22px;
+  letter-spacing: 0.15em;
+  color: #fff;
+}
+
+#header .logo span { color: var(--weave-lt); }
+
+/* Turn / phase info */
+#turn-info {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  color: var(--neutral);
+  text-align: center;
+}
+
+#turn-info .phase-label {
+  font-size: 14px;
+  color: var(--text);
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+
+#turn-info .active-player {
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+/* Phase dots */
+#phase-dots {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.phase-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: background 0.3s;
+}
+
+.phase-dot.active { background: var(--gold); box-shadow: 0 0 6px var(--gold); }
+.phase-dot.done   { background: var(--text-dim); }
+
+/* Corruption gauge */
+#corruption-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+}
+
+#corruption-bar .label { color: var(--corrupt-lt); letter-spacing: 0.08em; }
+
+#gauge-track {
+  width: 140px;
+  height: 10px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+#gauge-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3a1a0a, var(--corrupt-lt));
+  border-radius: 2px;
+  transition: width 0.4s ease;
+  width: 0%;
+}
+
+#gauge-value { color: var(--corrupt-lt); min-width: 28px; text-align: right; }
+
+/* ── MAIN GAME GRID ───────────────────────────────── */
+#game-wrap {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: calc(100vh - 49px);
+}
+
+/* ── PLAYER AREAS ─────────────────────────────────── */
+#player2-area,
+#player1-area {
+  display: grid;
+  grid-template-columns: 180px 1fr 180px;
+  gap: 0;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+#player1-area {
+  border-bottom: none;
+  border-top: 1px solid var(--border);
+}
+
+.player-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 12px;
+}
+
+.player-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.08em;
+}
+
+.p1 .player-name { color: var(--rem-lt); }
+.p2 .player-name { color: var(--weave-lt); }
+
+.life-display {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  color: var(--neutral);
+}
+
+.life-display .life-val {
+  font-size: 28px;
+  color: var(--text);
+  font-weight: bold;
+  line-height: 1;
+}
+
+.resource-display {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  color: var(--neutral);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.resource-display .res-val     { font-size: 15px; }
+.p1 .resource-display .res-val { color: var(--rem-lt); }
+.p2 .resource-display .res-val { color: var(--weave-lt); }
+
+/* Hand zone */
+.hand-zone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px;
+  min-height: 96px;
+}
+
+/* Deck / discard piles */
+.player-deck-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.deck-pile {
+  width: 54px;
+  height: 76px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  flex-direction: column;
+  gap: 2px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.deck-pile:hover  { border-color: var(--neutral); }
+.deck-pile .pile-label { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* ── BATTLEFIELD ──────────────────────────────────── */
+#battlefield {
+  background: var(--panel);
+  display: grid;
+  grid-template-rows: 1fr 2px 1fr;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Watermark */
+#battlefield::before {
+  content: 'BATTLEFIELD';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 72px;
+  letter-spacing: 0.2em;
+  color: var(--border);
+  pointer-events: none;
+  z-index: 0;
+  white-space: nowrap;
+}
+
+.divider {
+  background: var(--border);
+  position: relative;
+}
+
+.divider::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  top: 50%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--neutral), transparent);
+}
+
+/* Field rows */
+.field-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px;
+  position: relative;
+  z-index: 1;
+  flex-wrap: wrap;
+}
+
+.field-row-label {
+  position: absolute;
+  left: 10px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px;
+  color: var(--text-dim);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#p2-field .field-row-label { top: 6px; }
+#p1-field .field-row-label { bottom: 6px; }
+
+/* Empty field slots */
+.field-slot {
+  width: 80px;
+  height: 112px;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-family: 'Share Tech Mono', monospace;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.field-slot.valid-target {
+  border-color: var(--gold);
+  border-style: solid;
+  animation: pulse-gold 1s infinite;
+  cursor: pointer;
+}
+
+.field-slot.valid-attack {
+  border-color: var(--rem-lt);
+  border-style: solid;
+  animation: pulse-red 1s infinite;
+  cursor: pointer;
+}
+
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(200,160,64,0); }
+  50%       { box-shadow: 0 0 8px 2px rgba(200,160,64,0.3); }
+}
+
+@keyframes pulse-red {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232,54,79,0); }
+  50%       { box-shadow: 0 0 8px 2px rgba(232,54,79,0.3); }
+}
