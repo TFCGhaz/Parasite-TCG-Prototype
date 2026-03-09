@@ -1,0 +1,210 @@
+PARASITE
+Trading Card Game – Playtest Guide
+Version 0.1
+
+THE WORLD OF PARASITE
+
+Centuries ago, something arrived on Earth.
+
+Not an army. Not a ship. Seeds.
+
+These organisms quietly infiltrated human civilization, disguising themselves as technology. Wires were not wires, but nerve fibres. Factories were organs. Networks were living neural pathways stretching across continents.
+
+Humanity believed it had built a technological world.
+
+In truth, it had built a body.
+
+Now the organism has awakened.
+
+The ancient intelligence within this living infrastructure is known only as The Weave. Cities are beginning to change. Machines behave strangely. Entire power grids pulse with something that feels disturbingly alive.
+
+As the truth spreads, humanity fractures into desperate factions fighting for survival, dominance, or control.
+
+Three powers now struggle over the future of the world.
+
+THE FACTIONS
+
+🕸️ THE WEAVE
+
+The original biological intelligence.
+
+The Weave does not conquer worlds through war. It grows through them. Slowly, patiently, it spreads through infection and adaptation until resistance becomes impossible.
+
+To the Weave, humanity is not an enemy.
+
+It is an unfinished stage of evolution.
+
+Playstyle:
+Slow growth that becomes unstoppable if left alone.
+
+Goal:
+Spread Infection and drive the Corruption Gauge to total collapse.
+
+Strength:
+Scaling power and mutation.
+
+Weakness:
+Slow early game.
+
+🔧 THE REMNANTS
+
+The last organized human survivors.
+
+When the truth about the machines was discovered, the Remnants did something desperate: they dismantled their own technology to understand it. Now they fight using weapons built from salvaged Weave tissue and scrap metal.
+
+They are clever, ruthless, and running out of time.
+
+Playstyle:
+Aggressive, tactical, and resourceful.
+
+Goal:
+Destroy the enemy before the world falls completely to the parasite.
+
+Strength:
+Fast combat and powerful reactions.
+
+Weakness:
+Limited long-term scaling.
+
+☣️ THE SEVERED
+
+Not fully human.
+
+Not fully Weave.
+
+The Severed are survivors of partial infection. Something interrupted the parasite before it finished integrating them. The result is something new — people who can sense and manipulate both sides.
+
+They do not fight for humanity.
+
+They fight for leverage.
+
+Playstyle:
+Manipulation, control, and opportunism.
+
+Goal:
+Exploit both sides and accumulate Leverage.
+
+Strength:
+Control and trickery.
+
+Weakness:
+Unpredictable and complex to play.
+
+VICTORY CONDITIONS
+
+Each faction wins differently.
+
+The Weave
+Win instantly if the Corruption Gauge reaches 20 OR if 10 Infection tokens exist on enemy targets.
+
+The Remnants
+Reduce the opponent's Life Pool to 0.
+
+The Severed
+Collect 15 Leverage tokens.
+
+Each player begins with 20 Life.
+
+TURN ORDER CHEAT SHEET
+
+Each turn follows the same six phases.
+
+UPKEEP
+
+Resolve start-of-turn effects.
+
+Gain your base resources:
+Weave → Biomass
+Remnants → Scrap
+Severed → Flux
+
+Weave units gain 1 Growth Token.
+
+DRAW
+
+Draw 1 card from your deck.
+
+If you cannot draw, lose 2 Life.
+
+MAIN PHASE A
+
+You may:
+
+Play Units
+Play Action cards
+Activate abilities
+Position units near Locations
+
+Units played this turn cannot attack unless they have SURGE.
+
+COMBAT
+
+Choose which units attack.
+
+Opponent chooses blockers.
+
+Combat damage happens simultaneously.
+
+Destroyed units go to the discard pile.
+
+Unblocked units deal damage to the opponent's Life Pool.
+
+MAIN PHASE B
+
+Play more cards or activate abilities.
+
+The Weave may trigger Mutations during this phase if requirements are met.
+
+END PHASE
+
+Resolve end-of-turn effects.
+
+Discard down to 7 cards.
+
+Pass the turn.
+
+LOCATIONS
+
+Three Locations are placed in the centre of the board.
+
+A location is:
+
+Controlled
+Only one player has units near it.
+
+Contested
+Both players have units near it.
+
+Locations provide bonuses depending on control.
+
+CORRUPTION GAUGE
+
+The Corruption Gauge tracks the spread of The Weave.
+
+It increases when:
+
+Weave units survive combat
+Infection tokens are placed
+At the start of the Weave player's turn
+
+It decreases when:
+
+Weave units are destroyed
+Infection is removed
+Remnants perform Purge actions
+
+If the gauge reaches 20, The Weave wins instantly.
+
+PLAYTEST FEEDBACK
+
+After playing, please note:
+
+Who won
+Game length
+Any confusing rules
+Cards that felt too powerful or weak
+Whether the game felt tense or slow
+
+Your feedback will help improve future versions of PARASITE.
+
+End of Playtest Guide
