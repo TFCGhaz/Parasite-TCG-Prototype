@@ -3,7 +3,7 @@
 Digital prototype for the Parasite Trading Card Game.
 
 Play here:
-https://TFCGhaz.github.io/parasite-tcg/
+(https://tfcghaz.github.io/Parasite-TCG-Prototype/)
 
 Factions:
 - The Weave
