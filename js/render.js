@@ -223,6 +223,7 @@ function renderControls() {
   const btnAttack = document.getElementById('btn-attack');
   const btnCancel = document.getElementById('btn-cancel');
   const btnEnd    = document.getElementById('btn-end-phase');
+  const hint      = document.getElementById('phase-hint');
 
   btnPlay.disabled   = !(inMain && G.selectedHandCard && !G.gameOver);
   btnCancel.disabled = !(G.selectedHandCard || G.combatState);
@@ -236,4 +237,23 @@ function renderControls() {
     btnAttack.textContent = 'Declare Attack';
     btnAttack.disabled    = !(inCombat && !G.combatState && !G.gameOver);
   }
+
+  // Phase hint text
+  const hints = {
+    'UPKEEP': 'Resources gained. Growth tokens added to Weave units. Press Next Phase →',
+    'DRAW':   'Drawing a card… Press Next Phase →',
+    'MAIN A': inMain && G.selectedHandCard
+                ? 'Card selected — press Play Card to place it, or Cancel to deselect.'
+                : 'Click a card in your hand to select it, then press Play Card.',
+    'COMBAT': G.combatState?.phase === 'select_target'
+                ? 'Click an enemy unit to fight it, or press Attack Player for a direct hit.'
+                : G.combatState?.phase === 'select_attacker'
+                  ? 'Click one of YOUR units to declare it as the attacker.'
+                  : 'Press Declare Attack to start combat, or skip with Next Phase →',
+    'MAIN B': inMain && G.selectedHandCard
+                ? 'Card selected — press Play Card to place it, or Cancel to deselect.'
+                : 'Play more cards if you have resources, then press Next Phase →',
+    'END':    'End of turn — hand trimmed to 7. Press Next Phase → to pass the turn.',
+  };
+  if (hint) hint.textContent = hints[phase] || '';
 }

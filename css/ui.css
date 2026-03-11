@@ -7,16 +7,30 @@
 #controls {
   position: fixed;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
+  height: 56px;
   display: flex;
-  gap: 8px;
-  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 20px;
   background: var(--surface);
-  border: 1px solid var(--border);
-  border-bottom: none;
-  border-radius: 6px 6px 0 0;
+  border-top: 1px solid var(--border);
   z-index: 10;
+}
+
+/* Phase context hint shown in the control bar */
+#phase-hint {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.08em;
+  max-width: 220px;
+  text-align: center;
+  line-height: 1.4;
+  border-left: 2px solid var(--border);
+  padding-left: 10px;
 }
 
 /* Buttons */
@@ -62,6 +76,14 @@
   border-color: var(--rem);
 }
 .btn-end:hover:not(:disabled) { background: var(--rem); }
+
+.btn-tutorial {
+  background: transparent;
+  color: var(--text-dim);
+  border-color: var(--border);
+  font-size: 11px;
+}
+.btn-tutorial:hover { color: var(--text); border-color: var(--neutral); }
 
 /* ── COMBAT PENDING NOTICE ───────────────────────── */
 #combat-pending {

@@ -98,7 +98,8 @@
 #game-wrap {
   display: grid;
   grid-template-rows: auto 1fr auto;
-  height: calc(100vh - 49px);
+  /* 49px header + 56px controls bar */
+  height: calc(100vh - 49px - 56px);
 }
 
 /* ── PLAYER AREAS ─────────────────────────────────── */
@@ -114,6 +115,8 @@
 #player1-area {
   border-bottom: none;
   border-top: 1px solid var(--border);
+  /* Extra bottom padding so the fixed controls bar never overlaps cards */
+  padding-bottom: 14px;
 }
 
 .player-info {

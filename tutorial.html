@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PARASITE TCG — How to Play</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:       #0a0c10;
+      --surface:  #111420;
+      --panel:    #161b28;
+      --border:   #1e2535;
+      --weave:    #1a7a4a;
+      --weave-lt: #2dbd72;
+      --rem:      #8b1a2a;
+      --rem-lt:   #e8364f;
+      --neutral:  #8892a4;
+      --text:     #c8d4e8;
+      --text-dim: #5a6678;
+      --gold:     #c8a040;
+      --corrupt:  #ff6040;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Barlow', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* ── HEADER ── */
+    .tut-header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky; top: 0; z-index: 20;
+    }
+    .tut-header .logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 20px; letter-spacing: 0.15em;
+    }
+    .tut-header .logo span { color: var(--weave-lt); }
+    .tut-header .subtitle {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px; color: var(--neutral); letter-spacing: 0.1em;
+    }
+    .back-btn {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 13px; letter-spacing: 0.1em;
+      padding: 7px 16px; border-radius: 3px;
+      border: 1px solid var(--border); background: transparent;
+      color: var(--neutral); cursor: pointer; text-decoration: none;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .back-btn:hover { color: var(--text); border-color: var(--neutral); }
+
+    /* ── LAYOUT ── */
+    .tut-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* ── NAV ── */
+    .toc {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 20px 24px;
+      margin-bottom: 48px;
+    }
+    .toc h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 13px; letter-spacing: 0.15em;
+      color: var(--neutral); text-transform: uppercase; margin-bottom: 12px;
+    }
+    .toc ol {
+      list-style: none; display: flex; flex-direction: column; gap: 6px;
+    }
+    .toc li a {
+      font-family: 'Share Tech Mono', monospace; font-size: 12px;
+      color: var(--text-dim); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .toc li a:hover { color: var(--gold); }
+    .toc li .toc-num { color: var(--border); margin-right: 8px; }
+
+    /* ── SECTIONS ── */
+    .section {
+      margin-bottom: 56px;
+      scroll-margin-top: 80px;
+    }
+
+    .section-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px; letter-spacing: 0.2em; color: var(--neutral);
+      text-transform: uppercase; margin-bottom: 6px;
+    }
+
+    h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 32px; letter-spacing: 0.05em;
+      color: #fff; margin-bottom: 16px;
+      border-bottom: 1px solid var(--border); padding-bottom: 10px;
+    }
+
+    h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 20px; color: var(--gold);
+      margin: 24px 0 10px; letter-spacing: 0.04em;
+    }
+
+    p { margin-bottom: 14px; font-size: 15px; }
+
+    strong { color: #fff; font-weight: 600; }
+    em { color: var(--neutral); }
+
+    ul, ol {
+      margin: 0 0 16px 20px;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    li { font-size: 15px; }
+
+    /* ── CALLOUT BOXES ── */
+    .callout {
+      border-radius: 4px; padding: 14px 18px;
+      margin: 20px 0; border-left: 3px solid;
+      font-size: 14px;
+    }
+    .callout.tip    { background: rgba(200,160,64,0.07); border-color: var(--gold); }
+    .callout.warn   { background: rgba(232,54,79,0.07);  border-color: var(--rem-lt); }
+    .callout.info   { background: rgba(45,189,114,0.07); border-color: var(--weave-lt); }
+    .callout-title  {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 13px; letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 6px;
+    }
+    .callout.tip  .callout-title { color: var(--gold); }
+    .callout.warn .callout-title { color: var(--rem-lt); }
+    .callout.info .callout-title { color: var(--weave-lt); }
+
+    /* ── STATS TABLE ── */
+    .stat-table {
+      width: 100%; border-collapse: collapse;
+      margin: 16px 0 24px; font-size: 14px;
+    }
+    .stat-table th {
+      background: var(--panel);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 13px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--neutral);
+      padding: 8px 12px; text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .stat-table td {
+      padding: 8px 12px; border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .stat-table tr:last-child td { border-bottom: none; }
+    .stat-table td:first-child {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 12px; color: var(--gold); white-space: nowrap;
+      width: 140px;
+    }
+
+    /* ── PHASE STEPS ── */
+    .phase-list { display: flex; flex-direction: column; gap: 10px; margin: 16px 0; }
+    .phase-step {
+      display: flex; gap: 14px; align-items: flex-start;
+      background: var(--panel); border: 1px solid var(--border);
+      border-radius: 4px; padding: 12px 16px;
+    }
+    .phase-step .step-num {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px; color: var(--gold);
+      background: rgba(200,160,64,0.1);
+      border: 1px solid var(--gold); border-radius: 3px;
+      padding: 2px 6px; white-space: nowrap; flex-shrink: 0; margin-top: 2px;
+    }
+    .phase-step .step-body strong {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 16px; letter-spacing: 0.05em;
+    }
+    .phase-step .step-body p { margin: 4px 0 0; font-size: 13px; color: var(--neutral); }
+
+    /* ── FACTION CARDS ── */
+    .faction-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+    .faction-card {
+      border-radius: 6px; padding: 16px 18px;
+      border: 1px solid;
+    }
+    .faction-card.weave   { background: rgba(13,61,37,0.3);  border-color: var(--weave); }
+    .faction-card.remnant { background: rgba(61,13,20,0.3);  border-color: var(--rem); }
+    .faction-card h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 18px; letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+    .faction-card.weave   h4 { color: var(--weave-lt); }
+    .faction-card.remnant h4 { color: var(--rem-lt); }
+    .faction-card p { font-size: 13px; color: var(--neutral); margin-bottom: 8px; }
+    .faction-card .win-tag {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px; letter-spacing: 0.08em;
+      padding: 3px 7px; border-radius: 3px; display: inline-block;
+    }
+    .faction-card.weave   .win-tag { background: rgba(45,189,114,0.15); color: var(--weave-lt); }
+    .faction-card.remnant .win-tag { background: rgba(232,54,79,0.15);  color: var(--rem-lt); }
+
+    /* ── EXAMPLE GAME ── */
+    .example-game { display: flex; flex-direction: column; gap: 4px; }
+
+    .turn-block {
+      border: 1px solid var(--border);
+      border-radius: 6px; overflow: hidden;
+      margin-bottom: 12px;
+    }
+    .turn-header {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 16px;
+      background: var(--panel); cursor: pointer;
+      user-select: none;
+      justify-content: space-between;
+    }
+    .turn-header:hover { background: #1c2234; }
+    .turn-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 16px; letter-spacing: 0.06em;
+    }
+    .turn-header .turn-player {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px; letter-spacing: 0.1em; padding: 2px 8px;
+      border-radius: 3px;
+    }
+    .turn-header .rem-badge  { background: rgba(232,54,79,0.15); color: var(--rem-lt); }
+    .turn-header .weave-badge{ background: rgba(45,189,114,0.15); color: var(--weave-lt); }
+    .turn-header .chevron { color: var(--text-dim); font-size: 12px; transition: transform 0.2s; }
+    .turn-block.open .chevron { transform: rotate(180deg); }
+
+    .turn-body { display: none; padding: 16px 20px; border-top: 1px solid var(--border); }
+    .turn-block.open .turn-body { display: block; }
+
+    .game-step {
+      display: flex; gap: 12px; margin-bottom: 14px; align-items: flex-start;
+    }
+    .game-step:last-child { margin-bottom: 0; }
+    .phase-badge {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 9px; letter-spacing: 0.08em;
+      white-space: nowrap; padding: 3px 7px; border-radius: 3px;
+      flex-shrink: 0; margin-top: 2px;
+      border: 1px solid var(--border); color: var(--text-dim);
+      min-width: 76px; text-align: center;
+    }
+    .phase-badge.upkeep  { border-color: #4a6080; color: #7a90b0; }
+    .phase-badge.draw    { border-color: #6a5020; color: var(--gold); }
+    .phase-badge.main    { border-color: var(--weave); color: var(--weave-lt); }
+    .phase-badge.combat  { border-color: var(--rem); color: var(--rem-lt); }
+    .phase-badge.end     { border-color: var(--border); color: var(--text-dim); }
+
+    .game-step .step-text { font-size: 14px; line-height: 1.6; }
+    .game-step .step-text strong { color: #fff; }
+    .game-step .step-text .card-ref {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 12px; padding: 1px 5px;
+      border-radius: 3px; display: inline;
+    }
+    .card-ref.weave   { background: rgba(45,189,114,0.12); color: var(--weave-lt); border: 1px solid rgba(45,189,114,0.3); }
+    .card-ref.remnant { background: rgba(232,54,79,0.12);  color: var(--rem-lt);   border: 1px solid rgba(232,54,79,0.3); }
+
+    .state-bar {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      background: #0d1018; border: 1px solid var(--border);
+      border-radius: 4px; padding: 8px 14px; margin: 10px 0;
+      font-family: 'Share Tech Mono', monospace; font-size: 11px;
+    }
+    .state-bar span { color: var(--text-dim); }
+    .state-bar .sv  { color: var(--text); }
+    .state-bar .sv.good { color: var(--weave-lt); }
+    .state-bar .sv.bad  { color: var(--rem-lt); }
+    .state-bar .sv.warn { color: var(--corrupt); }
+
+    /* ── KEYWORDS TABLE ── */
+    .keyword-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px; margin: 16px 0;
+    }
+    .keyword-item {
+      background: var(--panel); border: 1px solid var(--border);
+      border-radius: 4px; padding: 10px 14px;
+    }
+    .keyword-item .kw-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 14px; letter-spacing: 0.08em;
+      color: var(--gold); margin-bottom: 4px;
+    }
+    .keyword-item p { font-size: 13px; color: var(--neutral); margin: 0; }
+
+    /* responsive */
+    @media (max-width: 600px) {
+      .faction-grid { grid-template-columns: 1fr; }
+      .keyword-grid { grid-template-columns: 1fr; }
+      .tut-wrap { padding: 24px 16px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="tut-header">
+  <div>
+    <div class="logo">PARA<span>SITE</span> TCG</div>
+    <div class="subtitle">HOW TO PLAY — TUTORIAL & EXAMPLE GAME</div>
+  </div>
+  <a href="index.html" class="back-btn">← Back to Game</a>
+</div>
+
+<div class="tut-wrap">
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="toc">
+    <h3>Contents</h3>
+    <ol>
+      <li><a href="#overview"><span class="toc-num">01</span> What is PARASITE TCG?</a></li>
+      <li><a href="#setup"><span class="toc-num">02</span> Setting Up</a></li>
+      <li><a href="#anatomy"><span class="toc-num">03</span> Reading a Card</a></li>
+      <li><a href="#phases"><span class="toc-num">04</span> Turn Structure</a></li>
+      <li><a href="#combat"><span class="toc-num">05</span> How Combat Works</a></li>
+      <li><a href="#keywords"><span class="toc-num">06</span> Keywords Reference</a></li>
+      <li><a href="#factions"><span class="toc-num">07</span> The Factions</a></li>
+      <li><a href="#corruption"><span class="toc-num">08</span> The Corruption Gauge</a></li>
+      <li><a href="#example"><span class="toc-num">09</span> Example Game (Turns 1–4)</a></li>
+      <li><a href="#tips"><span class="toc-num">10</span> Tips for New Players</a></li>
+    </ol>
+  </div>
+
+  <!-- 01 OVERVIEW -->
+  <div class="section" id="overview">
+    <div class="section-label">Section 01</div>
+    <h2>What is PARASITE TCG?</h2>
+    <p>PARASITE is a two-player strategic card game. Each player controls a faction of units, deploys them to a shared battlefield, and tries to fulfil their faction's unique win condition before the opponent fulfils theirs.</p>
+    <p>Unlike many card games, PARASITE does not have a single win condition for both sides. <strong>The Weave wins by spreading Infection and maxing out the Corruption Gauge. The Remnants win by reducing their opponent's Life to zero.</strong> This means both players are playing a fundamentally different game — even when they're sitting across the same table.</p>
+
+    <div class="callout info">
+      <div class="callout-title">🎯 The Golden Rule</div>
+      When in doubt about a rule, the action log on the right side of the screen records everything that happens. Click the "ACTION LOG" tab to open it and trace back what just occurred.
+    </div>
+  </div>
+
+  <!-- 02 SETUP -->
+  <div class="section" id="setup">
+    <div class="section-label">Section 02</div>
+    <h2>Setting Up</h2>
+    <ol>
+      <li>Open <strong>index.html</strong> in a browser. The game starts automatically.</li>
+      <li>Player 1 plays <strong>The Remnants ⚡</strong> (bottom of the screen). Player 2 plays <strong>The Weave 🕸️</strong> (top of the screen).</li>
+      <li>Both players are automatically dealt 5 cards from their shuffled deck.</li>
+      <li>A <strong>pass screen</strong> covers the hand between turns — tap "I'M READY" only once the correct player is watching.</li>
+      <li>Player 1 (Remnants) always goes first.</li>
+    </ol>
+
+    <div class="callout tip">
+      <div class="callout-title">💡 Pass Screen</div>
+      Because both players share one screen, the pass screen prevents the other player from peeking at your hand. Always wait until the screen is covered before passing the device.
+    </div>
+
+    <table class="stat-table">
+      <tr><th>Setting</th><th>Value</th></tr>
+      <tr><td>Starting Life</td><td>20 each</td></tr>
+      <tr><td>Starting Resources</td><td>2 each (gained again each Upkeep)</td></tr>
+      <tr><td>Opening Hand</td><td>5 cards (no mulligan in this prototype)</td></tr>
+      <tr><td>Max Hand Size</td><td>7 cards (discard excess at End Phase)</td></tr>
+      <tr><td>Max Field Size</td><td>5 units per player</td></tr>
+      <tr><td>Deck Size</td><td>19–20 cards per faction</td></tr>
+    </table>
+  </div>
+
+  <!-- 03 CARD ANATOMY -->
+  <div class="section" id="anatomy">
+    <div class="section-label">Section 03</div>
+    <h2>Reading a Card</h2>
+    <p>Every card has the same layout. Here's what each part means:</p>
+
+    <table class="stat-table">
+      <tr><th>Part</th><th>What it means</th></tr>
+      <tr><td>🕸️ / ⚡ top-left</td><td>Faction icon — 🕸️ is The Weave, ⚡ is The Remnants.</td></tr>
+      <tr><td>Number top-right</td><td><strong>Cost</strong> — how many resources you must spend to play this card.</td></tr>
+      <tr><td>Big emoji in the middle</td><td>Placeholder art — represents the card's creature or effect.</td></tr>
+      <tr><td>⚔ bottom-left (units only)</td><td><strong>Attack (ATK)</strong> — damage dealt in combat.</td></tr>
+      <tr><td>🛡 bottom-right (units only)</td><td><strong>Defence (DEF)</strong> — damage absorbed. When DEF reaches 0, the unit is destroyed.</td></tr>
+      <tr><td>Text bar (small strip)</td><td>Card type: UNIT or ACTION.</td></tr>
+    </table>
+
+    <p><strong>To read a card's full ability text</strong>, click it anywhere — a detail panel appears on the left side of the screen with the full ability description and flavour text.</p>
+
+    <div class="callout tip">
+      <div class="callout-title">💡 Units vs Actions</div>
+      <strong>Unit cards</strong> are placed on the battlefield and stay there until destroyed. <strong>Action cards</strong> have a one-time effect and go straight to the discard pile after being played. Actions have a dashed border to tell them apart.
+    </div>
+  </div>
+
+  <!-- 04 PHASES -->
+  <div class="section" id="phases">
+    <div class="section-label">Section 04</div>
+    <h2>Turn Structure</h2>
+    <p>Every turn has 6 phases, shown by the dots in the header. The current phase is highlighted in gold. Press <strong>Next Phase →</strong> to advance.</p>
+
+    <div class="phase-list">
+      <div class="phase-step">
+        <div class="step-num">01 UPKEEP</div>
+        <div class="step-body">
+          <strong>Gain your resources for this turn.</strong>
+          <p>Both players gain 2 base resources (Scrap for Remnants, Biomass for Weave). Weave players also grow all their units by +1 Growth Token and the Corruption Gauge rises by 1. Remnants get a bonus +1 Scrap if Corruption is 5 or below. This phase happens automatically — just press Next Phase.</p>
+        </div>
+      </div>
+      <div class="phase-step">
+        <div class="step-num">02 DRAW</div>
+        <div class="step-body">
+          <strong>Draw 1 card from your deck.</strong>
+          <p>Press Next Phase to draw. If your deck is empty, you take 2 damage instead. Plan your resources carefully — running out of cards hurts.</p>
+        </div>
+      </div>
+      <div class="phase-step">
+        <div class="step-num">03 MAIN A</div>
+        <div class="step-body">
+          <strong>Play cards from your hand.</strong>
+          <p>Click a card in your hand to select it (it lifts up). Then press <strong>Play Card</strong>. You can play as many cards as you can afford. Units played this phase cannot attack immediately (Summoning Fatigue) unless they have the SURGE keyword.</p>
+        </div>
+      </div>
+      <div class="phase-step">
+        <div class="step-num">04 COMBAT</div>
+        <div class="step-body">
+          <strong>Declare attackers and fight.</strong>
+          <p>Press <strong>Declare Attack</strong>. Click one of your un-exhausted units to select it as the attacker — it will glow. Then click an enemy unit to fight it, or press <strong>Attack Player</strong> to deal damage directly to the opponent (only if they have no units, or you have PIERCING). You can attack multiple times — once per un-exhausted unit. Press Next Phase when done.</p>
+        </div>
+      </div>
+      <div class="phase-step">
+        <div class="step-num">05 MAIN B</div>
+        <div class="step-body">
+          <strong>Play more cards (second chance).</strong>
+          <p>Identical to Main A. Useful for playing cards after seeing how combat resolved. Weave players trigger Mutations here if growth is complete.</p>
+        </div>
+      </div>
+      <div class="phase-step">
+        <div class="step-num">06 END</div>
+        <div class="step-body">
+          <strong>Discard to hand limit, pass turn.</strong>
+          <p>If you have more than 7 cards, the oldest ones are discarded automatically. All ATK boosts from this turn reset. Press Next Phase to trigger the pass screen and hand off to the other player.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 COMBAT -->
+  <div class="section" id="combat">
+    <div class="section-label">Section 05</div>
+    <h2>How Combat Works</h2>
+    <p>Combat in PARASITE is <strong>simultaneous</strong>. Both the attacker and the defender deal their ATK to each other at the same time. There is no separate "blocking" phase — the defending player simply chooses which of their units to put in the way.</p>
+
+    <h3>Step-by-step</h3>
+    <ol>
+      <li>Press <strong>Declare Attack</strong> to enter combat mode.</li>
+      <li>Click one of your units. It will glow red — this is your attacker.</li>
+      <li>Click an enemy unit — both deal damage simultaneously.</li>
+      <li>If either unit's DEF drops to 0 or below, it is destroyed.</li>
+      <li>The attacker becomes <strong>Exhausted</strong> and cannot attack again this turn.</li>
+      <li>Repeat with other un-exhausted units if you wish.</li>
+    </ol>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠ Attacking is optional</div>
+      You never have to attack. Sometimes the best move is to build up units and wait. Attacking a high-DEF unit with a low-ATK unit is usually a bad trade — your unit might die and deal no meaningful damage.
+    </div>
+
+    <h3>Direct Attacks</h3>
+    <p>If your opponent has <strong>no units on the field</strong>, you can press <strong>Attack Player</strong> instead of clicking a unit. This deals your attacker's ATK directly to their Life total. Units with <strong>PIERCING</strong> can also attack the player directly regardless of whether the opponent has units.</p>
+
+    <h3>Infection Penalty</h3>
+    <p>Infected units (shown with a ☣ badge) lose <strong>1 ATK</strong> in combat. A unit with ATK 2 that has an infection token deals only 1 damage. Keep your units clean with Purge Protocol or Combat Medic.</p>
+  </div>
+
+  <!-- 06 KEYWORDS -->
+  <div class="section" id="keywords">
+    <div class="section-label">Section 06</div>
+    <h2>Keywords Reference</h2>
+    <div class="keyword-grid">
+      <div class="keyword-item">
+        <div class="kw-name">SURGE</div>
+        <p>This unit can attack the same turn it is played. Normally units suffer Summoning Fatigue and must wait a turn.</p>
+      </div>
+      <div class="keyword-item">
+        <div class="kw-name">PIERCING</div>
+        <p>Excess damage carries through to the opponent's Life. If a PIERCING unit has ATK 4 and the blocker has DEF 1, the opponent loses 3 Life.</p>
+      </div>
+      <div class="keyword-item">
+        <div class="kw-name">HIVE</div>
+        <p>Weave keyword. This unit gains bonuses based on how many other HIVE units you control. Isolating them weakens them.</p>
+      </div>
+      <div class="keyword-item">
+        <div class="kw-name">PURIFIER</div>
+        <p>When this unit enters play, remove 1 Infection token from a friendly unit. Crucial for Remnants keeping their units clean.</p>
+      </div>
+      <div class="keyword-item">
+        <div class="kw-name">VOLATILE</div>
+        <p>When destroyed, deals 2 damage to a random enemy unit. The Weave sometimes destroys its own VOLATILE units intentionally.</p>
+      </div>
+      <div class="keyword-item">
+        <div class="kw-name">MUTATION</div>
+        <p>Weave-only. When a unit accumulates enough Growth Tokens (usually 3), it transforms into a far more powerful version mid-game.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 FACTIONS -->
+  <div class="section" id="factions">
+    <div class="section-label">Section 07</div>
+    <h2>The Factions</h2>
+    <div class="faction-grid">
+      <div class="faction-card remnant">
+        <h4>⚡ THE REMNANTS</h4>
+        <p>Aggressive, efficient, and surgical. Hit hard and fast before The Weave gets established. Every unit death generates Scrap resources. Strong early game, can struggle if the game goes long.</p>
+        <p><strong>Best strategy:</strong> apply pressure early, use Purge Protocol to stay clean, and save Last Stand for when you're low on Life.</p>
+        <span class="win-tag">WIN: Reduce opponent's Life to 0</span>
+      </div>
+      <div class="faction-card weave">
+        <h4>🕸️ THE WEAVE</h4>
+        <p>Patient, inevitable, and exponentially powerful. Start small, grow your units, spread Infection, and overwhelm the board. Weak in the early game but almost unstoppable if given time.</p>
+        <p><strong>Best strategy:</strong> protect your Mycelian Crawlers until they Mutate, use Spore Burst carefully, and push Corruption higher whenever possible.</p>
+        <span class="win-tag">WIN: Push Corruption Gauge to 20</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 08 CORRUPTION -->
+  <div class="section" id="corruption">
+    <div class="section-label">Section 08</div>
+    <h2>The Corruption Gauge</h2>
+    <p>The Corruption Gauge is a shared track in the top-right corner of the screen, ranging from <strong>0 to 20</strong>. It represents how far The Weave's biological takeover has spread.</p>
+
+    <table class="stat-table">
+      <tr><th>Range</th><th>Effect</th></tr>
+      <tr><td>0–5</td><td>Low corruption. Remnants gain +1 bonus Scrap each Upkeep.</td></tr>
+      <tr><td>6–10</td><td>Rising. Weave units gain +1 DEF. Infected units deal -1 damage.</td></tr>
+      <tr><td>11–15</td><td>Critical. Weave Mutations require 1 fewer Growth Token.</td></tr>
+      <tr><td>16–19</td><td>Near-collapse. Remnants' most powerful cards unlock.</td></tr>
+      <tr><td>20</td><td><strong>The Weave wins immediately.</strong></td></tr>
+    </table>
+
+    <p>The gauge rises when: a Weave unit survives combat (+1), a Weave turn begins (+1), a Spore Node is on the field (extra +1 per node), Creeping Rot is played (+1), or a Mutation completes (+2).</p>
+    <p>The gauge falls when: a Weave unit is destroyed (-1), Purge Protocol is played (-2), or Infection tokens are removed.</p>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠ Remnants: Watch the gauge!</div>
+      The Corruption Gauge is your clock. If you're not killing Weave units and cleaning Infections, you will lose the gauge race even if you're winning in combat. Purge Protocol is one of your most important cards.
+    </div>
+  </div>
+
+  <!-- 09 EXAMPLE GAME -->
+  <div class="section" id="example">
+    <div class="section-label">Section 09</div>
+    <h2>Example Game — Turns 1 to 4</h2>
+    <p>Here is a narrated example of how a typical early game unfolds. Both players have drawn their opening hands and Player 1 (Remnants) is about to take their first turn.</p>
+    <p><em>Note: Cards drawn are illustrative — your actual draw will differ.</em></p>
+
+    <div class="example-game">
+
+      <!-- TURN 1 — REMNANTS -->
+      <div class="turn-block open" onclick="toggleTurn(this)">
+        <div class="turn-header">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span class="turn-player rem-badge">PLAYER 1 — REMNANTS</span>
+            <span class="turn-title">Turn 1</span>
+          </div>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="turn-body">
+
+          <div class="game-step">
+            <span class="phase-badge upkeep">UPKEEP</span>
+            <div class="step-text">
+              P1 gains <strong>+2 Scrap</strong>. Corruption is at 0, so they also get +1 bonus Scrap.
+              <strong>Total: 3 Scrap.</strong>
+            </div>
+          </div>
+          <div class="state-bar">
+            <span>P1 Life: <span class="sv">20</span></span>
+            <span>P1 Scrap: <span class="sv good">3</span></span>
+            <span>P2 Life: <span class="sv">20</span></span>
+            <span>P2 Biomass: <span class="sv">2</span></span>
+            <span>Corruption: <span class="sv">0</span></span>
+          </div>
+
+          <div class="game-step">
+            <span class="phase-badge draw">DRAW</span>
+            <div class="step-text">P1 draws a card — let's say they draw <span class="card-ref remnant">Overclock</span>. Their hand now has 6 cards.</div>
+          </div>
+
+          <div class="game-step">
+            <span class="phase-badge main">MAIN A</span>
+            <div class="step-text">
+              P1 looks at their hand. They have <span class="card-ref remnant">Militia Grunt</span> (cost 1) and <span class="card-ref remnant">Salvage Runner</span> (cost 1) available. With 3 Scrap they can play both.
+              <br><br>
+              They click <span class="card-ref remnant">Militia Grunt</span> in their hand — it lifts up. They press <strong>Play Card</strong>. The Grunt appears on the field with ATK 2 / DEF 2. Cost paid: 1 Scrap remaining: 2.
+              <br><br>
+              They then play <span class="card-ref remnant">Salvage Runner</span> (cost 1). SURGE triggers — it can attack this turn! Its entry ability draws 1 card. Remaining: 1 Scrap.
+            </div>
+          </div>
+
+          <div class="game-step">
+            <span class="phase-badge combat">COMBAT</span>
+            <div class="step-text">
+              P1 presses <strong>Declare Attack</strong>. The Salvage Runner has SURGE so it can attack immediately. P2 has no units yet — P1 clicks the Runner, then presses <strong>Attack Player</strong>.
+              <br><br>
+              P2 takes <strong>1 damage</strong> (Runner's ATK 1). Runner becomes Exhausted. The Grunt was played this turn without SURGE, so it cannot attack.
+            </div>
+          </div>
+
+          <div class="game-step">
+            <span class="phase-badge end">END</span>
+            <div class="step-text">No cards to discard (hand is 5). Pass screen appears — P1 passes the device to P2.</div>
+          </div>
+
+          <div class="state-bar">
+            <span>P1 Field: <span class="sv">Grunt + Runner (exhausted)</span></span>
+            <span>P2 Life: <span class="sv bad">19</span></span>
+            <span>Corruption: <span class="sv">0</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TURN 2 — WEAVE -->
+      <div class="turn-block" onclick="toggleTurn(this)">
+        <div class="turn-header">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span class="turn-player weave-badge">PLAYER 2 — THE WEAVE</span>
+            <span class="turn-title">Turn 2</span>
+          </div>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="turn-body">
+
+          <div class="game-step">
+            <span class="phase-badge upkeep">UPKEEP</span>
+            <div class="step-text">
+              P2 is The Weave. They gain <strong>+2 Biomass</strong>. Because it's a Weave turn, <strong>Corruption rises to 1</strong>. P2 has no units yet, so no growth tokens are added.
+            </div>
+          </div>
+          <div class="state-bar">
+            <span>P2 Biomass: <span class="sv good">2</span></span>
+            <span>Corruption: <span class="sv warn">1</span></span>
+          </div>
+
+          <div class="game-step">
+            <span class="phase-badge draw">DRAW</span>
+            <div class="step-text">P2 draws a card — <span class="card-ref weave">Parasitic Drone</span> (ATK 2 / DEF 1, HIVE).</div>
+          </div>
+
+          <div class="game-step">
+            <span class="phase-badge main">MAIN A</span>
+            <div class="step-text">
+              P2 plays <span class="card-ref weave">Mycelian Crawler</span> (cost 1, ATK 1 / DEF 2). It enters with Summoning Fatigue — cannot attack this turn.
+              <br><br>
+              With 1 Biomass remaining, P2 also plays <span class="card-ref weave">Parasitic Drone</span> (cost 1, ATK 2 / DEF 1). Also Summoning Fatigue.
+            </div>
+          </div>
+
+          <div class="game-step">
+            <span class="phase-badge combat">COMBAT</span>
+            <div class="step-text">Both Weave units have Summoning Fatigue — they cannot attack. P2 skips combat and presses Next Phase.</div>
+          </div>
+
+          <div class="game-step">
+            <span class="phase-badge end">END</span>
+            <div class="step-text">No cards to discard. Pass device to P1.</div>
+          </div>
+
+          <div class="state-bar">
+            <span>P2 Field: <span class="sv">Crawler (1 growth token) + Drone</span></span>
+            <span>Corruption: <span class="sv warn">1</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TURN 3 — REMNANTS -->
+      <div class="turn-block" onclick="toggleTurn(this)">
+        <div class="turn-header">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span class="turn-player rem-badge">PLAYER 1 — REMNANTS</span>
+            <span class="turn-title">Turn 3</span>
+          </div>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="turn-body">
+
+          <div class="game-step">
+            <span class="phase-badge upkeep">UPKEEP</span>
+            <div class="step-text">Corruption is 1 (≤5), so P1 gets the bonus. <strong>Total Scrap: 3</strong>. Both P1 units refresh — the Grunt and Runner are no longer Exhausted.</div>
+          </div>
+
+          <div class="game-step">
+            <span class="phase-badge draw">DRAW</span>
+            <div class="step-text">P1 draws <span class="card-ref remnant">Scrap Engineer</span> (cost 2, ATK 2 / DEF 3, PURIFIER).</div>
+          </div>
+
+          <div class="game-step">
+            <span class="phase-badge main">MAIN A</span>
+            <div class="step-text">
+              P1 plays <span class="card-ref remnant">Scrap Engineer</span> for 2 Scrap. Its PURIFIER entry trigger fires — no friendly units are infected yet, so nothing to clear. P1 has 1 Scrap left.
+            </div>
+          </div>
+
+          <div class="game-step">
+            <span class="phase-badge combat">COMBAT</span>
+            <div class="step-text">
+              P1 has three units ready: <strong>Grunt (ATK 2)</strong>, <strong>Runner (ATK 1)</strong>, and <strong>Scrap Engineer (ATK 2)</strong>.
+              <br><br>
+              P2 has the <strong>Mycelian Crawler (DEF 2)</strong> and <strong>Parasitic Drone (DEF 1)</strong>.
+              <br><br>
+              P1 attacks with the Grunt → targets the Drone. Grunt deals 2 damage (Drone DEF 1 → -1 = destroyed). Drone retaliates for 2 (Grunt DEF 2 → 0 = also destroyed). <strong>Both die simultaneously.</strong>
+              <br><br>
+              Drone death trigger fires: places 1 Infection token on a random P1 unit — it lands on the Runner.
+              <br><br>
+              Grunt death trigger fires: P1 gains 1 Scrap (now 2 Scrap total).
+              <br><br>
+              P1 attacks with the Runner → targets the Crawler. Runner deals 1 damage (Crawler DEF 2 → 1). Crawler retaliates for 1 (Runner DEF 2 → 1). Both survive, both Exhausted.
+              <br><br>
+              P1 attacks with the Scrap Engineer → targets the Crawler (DEF now 1). Engineer deals 2 (Crawler destroyed). Crawler retaliates for 1 (Engineer DEF 3 → 2). <strong>Crawler destroyed.</strong> Engineer kills it — gains 2 Scrap (on-kill ability). Total: 4 Scrap.
+            </div>
+          </div>
+
+          <div class="state-bar">
+            <span>P1 Field: <span class="sv">Runner (☣×1, DEF 1) + Engineer (DEF 2)</span></span>
+            <span>P1 Scrap: <span class="sv good">4</span></span>
+            <span>P2 Field: <span class="sv bad">EMPTY</span></span>
+            <span>Corruption: <span class="sv">1</span></span>
+          </div>
+
+          <div class="game-step">
+            <span class="phase-badge end">END</span>
+            <div class="step-text">P1 passes to P2. A bad turn for The Weave — both units wiped. But the Infection token on the Runner is a small foothold.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TURN 4 — WEAVE -->
+      <div class="turn-block" onclick="toggleTurn(this)">
+        <div class="turn-header">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span class="turn-player weave-badge">PLAYER 2 — THE WEAVE</span>
+            <span class="turn-title">Turn 4 — The Weave Rebuilds</span>
+          </div>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="turn-body">
+
+          <div class="game-step">
+            <span class="phase-badge upkeep">UPKEEP</span>
+            <div class="step-text">
+              Weave upkeep: <strong>Corruption rises to 2</strong>. P2 gains 2 Biomass. No units on field — no growth tokens.
+            </div>
+          </div>
+
+          <div class="game-step">
+            <span class="phase-badge draw">DRAW</span>
+            <div class="step-text">P2 draws <span class="card-ref weave">Hive Guardian</span> (cost 3, ATK 2 / DEF 5, HIVE).</div>
+          </div>
+
+          <div class="game-step">
+            <span class="phase-badge main">MAIN A</span>
+            <div class="step-text">
+              P2 plays two <span class="card-ref weave">Mycelian Crawlers</span> (cost 1 each). Both enter with Summoning Fatigue. P2 also plays <span class="card-ref weave">Biomass Surge</span> (cost 0) — gaining 3 Biomass. Total Biomass: 3.
+              <br><br>
+              P2 then plays <span class="card-ref weave">Spore Node</span> (cost 2, DEF 4). 1 Biomass remaining.
+              <br><br>
+              P2 has 3 units — 2 Crawlers and a Spore Node. The Spore Node will add +1 Corruption each Weave upkeep from now on.
+            </div>
+          </div>
+
+          <div class="game-step">
+            <span class="phase-badge combat">COMBAT</span>
+            <div class="step-text">All Weave units have Summoning Fatigue — cannot attack. P2 skips combat.</div>
+          </div>
+
+          <div class="game-step">
+            <span class="phase-badge end">END</span>
+            <div class="step-text">Pass to P1. The Weave has rebuilt a formidable board. Next upkeep both Crawlers will have 1 Growth Token. If P1 doesn't pressure them, those Crawlers will hit 3 tokens and Mutate into Mycelian Horrors (ATK 4 / DEF 5).</div>
+          </div>
+
+          <div class="state-bar">
+            <span>P2 Field: <span class="sv good">2× Crawler + Spore Node</span></span>
+            <span>Corruption: <span class="sv warn">2 (will rise faster now)</span></span>
+            <span>P1 Task: <span class="sv bad">Kill those Crawlers before they Mutate!</span></span>
+          </div>
+
+          <div class="callout tip">
+            <div class="callout-title">💡 What should P1 do next?</div>
+            P1 should target the Crawlers immediately — especially with the Engineer (ATK 2, can kill either Crawler in one hit). Leaving them alive for 2 more turns means facing two ATK 4 / DEF 5 Horrors. Also, use Purge Protocol to remove the Infection from the Runner before it spreads further.
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /example-game -->
+  </div>
+
+  <!-- 10 TIPS -->
+  <div class="section" id="tips">
+    <div class="section-label">Section 10</div>
+    <h2>Tips for New Players</h2>
+
+    <h3>For Remnants Players</h3>
+    <ul>
+      <li><strong>Go wide early.</strong> Militia Grunts and Salvage Runners are cheap. Flood the field while The Weave is still building.</li>
+      <li><strong>Kill Crawlers before they Mutate.</strong> A Crawler with 2 growth tokens is a 1-turn timer. Prioritise them above everything else.</li>
+      <li><strong>Save Purge Protocol.</strong> Creeping Rot can infect your entire field in one move. Having a Purge Protocol in hand is your insurance policy.</li>
+      <li><strong>Watch the gauge.</strong> If Corruption hits 10+, The Weave's DEF bonuses make them very hard to kill. Act before that.</li>
+      <li><strong>Don't overcommit.</strong> Sending a 1-ATK unit into a 3-DEF unit just trades your unit for nothing. Pick your fights.</li>
+    </ul>
+
+    <h3>For Weave Players</h3>
+    <ul>
+      <li><strong>Protect your Crawlers.</strong> Mycelian Horror (the mutated form) is the most powerful unit in the game. Keeping Crawlers alive for 3 turns is your top priority.</li>
+      <li><strong>Use Spore Node as a shield.</strong> Its 0 ATK makes it a useless attacker, but it has 4 DEF and punishes units that attack it with Infection.</li>
+      <li><strong>Biomass Surge is free.</strong> Play it whenever you need the extra push — it costs 0.</li>
+      <li><strong>Spore Burst is a sacrifice.</strong> It lets you trade a weak unit for 2 Infection tokens on the strongest enemy unit. Use it when you have a unit that's about to die anyway.</li>
+      <li><strong>Corruption is your clock.</strong> Every turn that passes without you dying, your position improves. Stall, defend, and grow.</li>
+    </ul>
+
+    <div class="callout info">
+      <div class="callout-title">🎮 Playing your first game</div>
+      For your very first game, don't worry about winning. Focus on understanding the turn flow: Upkeep (gain resources) → Draw (get a card) → Main A (play stuff) → Combat (attack) → Main B (play more stuff) → End (pass). After one full game you'll have an intuitive sense of the rhythm.
+    </div>
+  </div>
+
+</div><!-- /tut-wrap -->
+
+<script>
+  function toggleTurn(block) {
+    block.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
