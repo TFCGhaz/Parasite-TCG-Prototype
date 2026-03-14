@@ -1,15 +1,12 @@
-/* ════════════════════════════════════════════════════
-   layout.css — Header, game grid, player areas,
-                battlefield, field rows
-   ════════════════════════════════════════════════════ */
+/* layout.css -- Header, game grid, player areas, battlefield */
 
-/* ── HEADER ──────────────────────────────────────── */
+/* ── HEADER ── */
 #header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 2px solid var(--border);
   background: var(--surface);
   position: relative;
   z-index: 10;
@@ -22,24 +19,20 @@
   letter-spacing: 0.15em;
   color: #fff;
 }
-
 #header .logo span { color: var(--weave-lt); }
 
-/* Turn / phase info */
 #turn-info {
   font-family: 'Share Tech Mono', monospace;
   font-size: 11px;
   color: var(--neutral);
   text-align: center;
 }
-
 #turn-info .phase-label {
-  font-size: 14px;
-  color: var(--text);
+  font-size: 15px;
+  color: #fff;
   font-weight: bold;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
 }
-
 #turn-info .active-player {
   font-size: 13px;
   margin-top: 2px;
@@ -51,18 +44,16 @@
   gap: 4px;
   align-items: center;
   justify-content: center;
-  margin-top: 4px;
+  margin-top: 5px;
 }
-
 .phase-dot {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: var(--border);
   transition: background 0.3s;
 }
-
-.phase-dot.active { background: var(--gold); box-shadow: 0 0 6px var(--gold); }
+.phase-dot.active { background: var(--gold); box-shadow: 0 0 7px var(--gold); }
 .phase-dot.done   { background: var(--text-dim); }
 
 /* Corruption gauge */
@@ -73,93 +64,109 @@
   font-family: 'Share Tech Mono', monospace;
   font-size: 11px;
 }
-
-#corruption-bar .label { color: var(--corrupt-lt); letter-spacing: 0.08em; }
-
+#corruption-bar .label {
+  color: var(--corrupt-lt);
+  letter-spacing: 0.1em;
+  font-size: 12px;
+}
 #gauge-track {
   width: 140px;
-  height: 10px;
-  background: var(--border);
+  height: 12px;
+  background: rgba(0,0,0,0.4);
   border-radius: 2px;
   overflow: hidden;
+  border: 1px solid var(--border);
 }
-
 #gauge-fill {
   height: 100%;
-  background: linear-gradient(90deg, #3a1a0a, var(--corrupt-lt));
+  background: linear-gradient(90deg, #4a1a08, var(--corrupt-lt));
   border-radius: 2px;
   transition: width 0.4s ease;
   width: 0%;
 }
+#gauge-value {
+  color: var(--corrupt-lt);
+  min-width: 32px;
+  text-align: right;
+  font-size: 14px;
+  font-weight: bold;
+}
 
-#gauge-value { color: var(--corrupt-lt); min-width: 28px; text-align: right; }
-
-/* ── MAIN GAME GRID ───────────────────────────────── */
+/* ── MAIN GAME GRID ── */
 #game-wrap {
   display: grid;
   grid-template-rows: auto 1fr auto;
-  /* 49px header + 56px controls bar */
   height: calc(100vh - 49px - 56px);
 }
 
-/* ── PLAYER AREAS ─────────────────────────────────── */
-#player2-area,
+/* ── PLAYER AREAS ── */
+/* P2 = Weave, tinted green */
+#player2-area {
+  display: grid;
+  grid-template-columns: 180px 1fr 180px;
+  padding: 10px 14px;
+  border-bottom: 2px solid var(--weave);
+  background: linear-gradient(135deg, var(--weave-bg) 0%, #141f1a 60%, #0e1812 100%);
+}
+
+/* P1 = Remnants, tinted red */
 #player1-area {
   display: grid;
   grid-template-columns: 180px 1fr 180px;
-  gap: 0;
-  padding: 8px 12px;
-  border-bottom: 1px solid var(--border);
-}
-
-#player1-area {
-  border-bottom: none;
-  border-top: 1px solid var(--border);
-  /* Extra bottom padding so the fixed controls bar never overlaps cards */
+  padding: 10px 14px;
   padding-bottom: 14px;
+  border-top: 2px solid var(--rem);
+  background: linear-gradient(135deg, #1a0e12 0%, #1c1218 60%, var(--rem-bg) 100%);
 }
 
 .player-info {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 6px;
+  gap: 8px;
   padding: 8px 12px;
 }
 
 .player-name {
   font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  letter-spacing: 0.08em;
+  font-weight: 900;
+  font-size: 17px;
+  letter-spacing: 0.1em;
 }
-
 .p1 .player-name { color: var(--rem-lt); }
 .p2 .player-name { color: var(--weave-lt); }
 
+/* Life display - much more readable */
 .life-display {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 11px;
-  color: var(--neutral);
+  font-size: 10px;
+  color: var(--text-label);
+  letter-spacing: 0.12em;
 }
-
 .life-display .life-val {
-  font-size: 28px;
-  color: var(--text);
+  font-size: 32px;
+  color: #fff;
   font-weight: bold;
-  line-height: 1;
+  line-height: 1.1;
+  display: block;
 }
 
+/* Resource display */
 .resource-display {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 11px;
-  color: var(--neutral);
+  font-size: 10px;
+  color: var(--text-label);
+  letter-spacing: 0.12em;
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
-
-.resource-display .res-val     { font-size: 15px; }
+.resource-display .res-val {
+  font-size: 20px;
+  font-weight: bold;
+  display: block;
+  line-height: 1.2;
+}
 .p1 .resource-display .res-val { color: var(--rem-lt); }
 .p2 .resource-display .res-val { color: var(--weave-lt); }
 
@@ -171,7 +178,7 @@
   flex-wrap: wrap;
   gap: 6px;
   padding: 8px;
-  min-height: 96px;
+  min-height: 100px;
 }
 
 /* Deck / discard piles */
@@ -181,31 +188,35 @@
   justify-content: center;
   gap: 8px;
 }
-
 .deck-pile {
-  width: 54px;
-  height: 76px;
+  width: 56px;
+  height: 78px;
   border-radius: 4px;
   border: 1px solid var(--border);
-  background: var(--panel);
+  background: rgba(0,0,0,0.3);
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Share Tech Mono', monospace;
-  font-size: 11px;
-  color: var(--text-dim);
+  font-size: 14px;
+  color: var(--text);
+  font-weight: bold;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
   cursor: pointer;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, background 0.2s;
+}
+.deck-pile:hover { border-color: var(--neutral); background: rgba(255,255,255,0.05); }
+.deck-pile .pile-label {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-label);
 }
 
-.deck-pile:hover  { border-color: var(--neutral); }
-.deck-pile .pile-label { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; }
-
-/* ── BATTLEFIELD ──────────────────────────────────── */
+/* ── BATTLEFIELD ── */
 #battlefield {
-  background: var(--panel);
+  background: linear-gradient(180deg, #121828 0%, #0f1520 50%, #121828 100%);
   display: grid;
   grid-template-rows: 1fr 2px 1fr;
   position: relative;
@@ -221,9 +232,9 @@
   transform: translate(-50%, -50%);
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 900;
-  font-size: 72px;
+  font-size: 68px;
   letter-spacing: 0.2em;
-  color: var(--border);
+  color: rgba(45,54,80,0.4);
   pointer-events: none;
   z-index: 0;
   white-space: nowrap;
@@ -233,7 +244,6 @@
   background: var(--border);
   position: relative;
 }
-
 .divider::after {
   content: '';
   position: absolute;
@@ -254,17 +264,15 @@
   z-index: 1;
   flex-wrap: wrap;
 }
-
 .field-row-label {
   position: absolute;
   left: 10px;
   font-family: 'Share Tech Mono', monospace;
   font-size: 9px;
   color: var(--text-dim);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
-
 #p2-field .field-row-label { top: 6px; }
 #p1-field .field-row-label { bottom: 6px; }
 
@@ -282,16 +290,16 @@
   letter-spacing: 0.05em;
   text-transform: uppercase;
   font-family: 'Share Tech Mono', monospace;
-  transition: border-color 0.2s, background 0.2s;
+  transition: border-color 0.2s;
 }
 
+/* Combat highlight animations */
 .field-slot.valid-target {
   border-color: var(--gold);
   border-style: solid;
   animation: pulse-gold 1s infinite;
   cursor: pointer;
 }
-
 .field-slot.valid-attack {
   border-color: var(--rem-lt);
   border-style: solid;
@@ -300,11 +308,10 @@
 }
 
 @keyframes pulse-gold {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(200,160,64,0); }
-  50%       { box-shadow: 0 0 8px 2px rgba(200,160,64,0.3); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(218,176,80,0); }
+  50%       { box-shadow: 0 0 10px 3px rgba(218,176,80,0.35); }
 }
-
 @keyframes pulse-red {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(232,54,79,0); }
-  50%       { box-shadow: 0 0 8px 2px rgba(232,54,79,0.3); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,77,101,0); }
+  50%       { box-shadow: 0 0 10px 3px rgba(255,77,101,0.35); }
 }

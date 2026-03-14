@@ -1,9 +1,6 @@
-/* ════════════════════════════════════════════════════
-   ui.css — Controls, action log, card detail panel,
-            pass screen, win modal, combat notice
-   ════════════════════════════════════════════════════ */
+/* ui.css -- Controls, action log, card detail panel, pass screen, win modal */
 
-/* ── CONTROL BAR ─────────────────────────────────── */
+/* ── CONTROL BAR ── */
 #controls {
   position: fixed;
   bottom: 0;
@@ -16,66 +13,77 @@
   gap: 10px;
   padding: 0 20px;
   background: var(--surface);
-  border-top: 1px solid var(--border);
+  border-top: 2px solid var(--border);
   z-index: 10;
 }
 
-/* Phase context hint shown in the control bar */
+/* Phase hint */
 #phase-hint {
   font-family: 'Share Tech Mono', monospace;
   font-size: 10px;
-  color: var(--text-dim);
-  letter-spacing: 0.08em;
-  max-width: 220px;
+  color: var(--neutral);
+  letter-spacing: 0.06em;
+  max-width: 240px;
   text-align: center;
   line-height: 1.4;
   border-left: 2px solid var(--border);
-  padding-left: 10px;
+  padding-left: 12px;
 }
 
-/* Buttons */
+/* ── BUTTONS ── */
 .btn {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   font-size: 13px;
   letter-spacing: 0.1em;
-  padding: 7px 16px;
-  border-radius: 3px;
+  padding: 8px 18px;
+  border-radius: 4px;
   border: 1px solid;
   cursor: pointer;
   text-transform: uppercase;
-  transition: background 0.15s, color 0.15s, opacity 0.15s;
+  transition: background 0.15s, color 0.15s, opacity 0.15s, box-shadow 0.15s;
 }
-
-.btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.btn:disabled { opacity: 0.28; cursor: not-allowed; }
 
 .btn-primary {
-  background: #1a2a4a;
+  background: rgba(45,54,80,0.6);
   color: var(--text);
+  border-color: var(--border);
+}
+.btn-primary:hover:not(:disabled) {
+  background: rgba(60,72,110,0.8);
   border-color: var(--neutral);
 }
-.btn-primary:hover:not(:disabled) { background: #2a3a5a; }
 
 .btn-action {
-  background: transparent;
+  background: rgba(218,176,80,0.1);
   color: var(--gold);
   border-color: var(--gold);
 }
-.btn-action:hover:not(:disabled) { background: rgba(200,160,64,0.1); }
+.btn-action:hover:not(:disabled) {
+  background: rgba(218,176,80,0.2);
+  box-shadow: 0 0 8px rgba(218,176,80,0.25);
+}
 
 .btn-attack {
-  background: transparent;
+  background: rgba(255,77,101,0.1);
   color: var(--rem-lt);
   border-color: var(--rem-lt);
 }
-.btn-attack:hover:not(:disabled) { background: rgba(232,54,79,0.1); }
+.btn-attack:hover:not(:disabled) {
+  background: rgba(255,77,101,0.2);
+  box-shadow: 0 0 8px rgba(255,77,101,0.25);
+}
 
 .btn-end {
-  background: var(--rem-dk);
+  background: rgba(160,32,48,0.3);
   color: var(--rem-lt);
   border-color: var(--rem);
 }
-.btn-end:hover:not(:disabled) { background: var(--rem); }
+.btn-end:hover:not(:disabled) {
+  background: rgba(160,32,48,0.55);
+  box-shadow: 0 0 8px rgba(255,77,101,0.2);
+}
 
 .btn-tutorial {
   background: transparent;
@@ -83,28 +91,32 @@
   border-color: var(--border);
   font-size: 11px;
 }
-.btn-tutorial:hover { color: var(--text); border-color: var(--neutral); }
+.btn-tutorial:hover {
+  color: var(--text);
+  border-color: var(--neutral);
+}
 
-/* ── COMBAT PENDING NOTICE ───────────────────────── */
+/* ── COMBAT PENDING NOTICE ── */
 #combat-pending {
   position: fixed;
-  top: 60px;
+  top: 62px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(139,26,42,0.9);
+  background: rgba(100,20,30,0.92);
   border: 1px solid var(--rem-lt);
   border-radius: 4px;
-  padding: 6px 16px;
+  padding: 7px 18px;
   font-family: 'Share Tech Mono', monospace;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--rem-lt);
   z-index: 15;
   display: none;
   letter-spacing: 0.08em;
+  box-shadow: 0 2px 12px rgba(255,77,101,0.2);
 }
 #combat-pending.visible { display: block; }
 
-/* ── ACTION LOG ──────────────────────────────────── */
+/* ── ACTION LOG ── */
 #log-toggle {
   position: fixed;
   right: 0;
@@ -121,17 +133,17 @@
   color: var(--neutral);
   writing-mode: vertical-rl;
   letter-spacing: 0.1em;
-  transition: color 0.2s;
+  transition: color 0.2s, background 0.2s;
   z-index: 21;
 }
-#log-toggle:hover { color: var(--text); }
+#log-toggle:hover { color: var(--text); background: var(--surface); }
 
 #log-wrap {
   position: fixed;
   right: 0;
   top: 49px;
   bottom: 0;
-  width: 220px;
+  width: 230px;
   background: var(--surface);
   border-left: 1px solid var(--border);
   display: flex;
@@ -143,12 +155,12 @@
 #log-wrap.open { transform: translateX(0); }
 
 #log-title {
-  padding: 10px 14px;
+  padding: 12px 16px;
   border-bottom: 1px solid var(--border);
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   font-size: 14px;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   color: var(--neutral);
   text-transform: uppercase;
 }
@@ -168,76 +180,77 @@
 .log-entry {
   font-family: 'Share Tech Mono', monospace;
   font-size: 10px;
-  line-height: 1.4;
+  line-height: 1.5;
   color: var(--text-dim);
   border-left: 2px solid var(--border);
-  padding-left: 6px;
+  padding-left: 7px;
 }
-.log-entry.weave-log  { border-color: var(--weave);  color: #7dc9a0; }
-.log-entry.rem-log    { border-color: var(--rem);    color: #d08090; }
+.log-entry.weave-log  { border-color: var(--weave);  color: #80daa8; }
+.log-entry.rem-log    { border-color: var(--rem);    color: #e09090; }
 .log-entry.system-log { border-color: var(--gold);   color: var(--gold); }
-.log-entry.combat-log { border-color: #d07030;       color: #d09060; }
+.log-entry.combat-log { border-color: #c07838;       color: #d0a070; }
 
-/* ── CARD DETAIL PANEL ───────────────────────────── */
+/* ── CARD DETAIL PANEL ── */
 #card-detail {
   position: fixed;
   left: 12px;
   top: 50%;
   transform: translateY(-50%);
-  width: 200px;
+  width: 210px;
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 6px;
-  padding: 14px;
+  padding: 16px;
   z-index: 30;
   display: none;
   font-size: 12px;
   line-height: 1.5;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.5);
 }
 #card-detail.visible { display: block; }
 
 #card-detail .detail-name {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 900;
-  font-size: 18px;
+  font-size: 20px;
   margin-bottom: 6px;
   letter-spacing: 0.05em;
+  color: #fff;
 }
-
 #card-detail .detail-type {
   font-family: 'Share Tech Mono', monospace;
   font-size: 10px;
-  color: var(--text-dim);
-  margin-bottom: 8px;
+  color: var(--text-label);
+  margin-bottom: 10px;
   letter-spacing: 0.08em;
 }
-
 #card-detail .detail-stats {
   display: flex;
-  gap: 12px;
-  margin-bottom: 8px;
+  gap: 16px;
+  margin-bottom: 10px;
   font-family: 'Share Tech Mono', monospace;
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: bold;
 }
-
 #card-detail .detail-ability {
   color: var(--text);
+  font-size: 12px;
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+  margin-top: 4px;
+  line-height: 1.6;
+}
+#card-detail .detail-flavour {
+  color: var(--neutral);
+  font-style: italic;
   font-size: 11px;
   border-top: 1px solid var(--border);
   padding-top: 8px;
-  margin-top: 4px;
+  margin-top: 8px;
+  line-height: 1.5;
 }
 
-#card-detail .detail-flavour {
-  color: var(--text-dim);
-  font-style: italic;
-  font-size: 10px;
-  border-top: 1px solid var(--border);
-  padding-top: 6px;
-  margin-top: 6px;
-}
-
-/* ── PASS SCREEN ─────────────────────────────────── */
+/* ── PASS SCREEN ── */
 #pass-screen {
   position: fixed;
   inset: 0;
@@ -254,22 +267,22 @@
 #pass-screen h2 {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 900;
-  font-size: 48px;
+  font-size: 52px;
   letter-spacing: 0.15em;
 }
-
 #pass-screen p {
   color: var(--neutral);
   font-size: 16px;
-  max-width: 360px;
+  max-width: 380px;
   text-align: center;
+  line-height: 1.6;
 }
 
-/* ── WIN MODAL ───────────────────────────────────── */
+/* ── WIN MODAL ── */
 #modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.85);
   align-items: center;
   justify-content: center;
   z-index: 50;
@@ -281,22 +294,22 @@
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 32px 40px;
+  padding: 36px 48px;
   text-align: center;
   max-width: 480px;
   width: 90%;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.6);
 }
-
 #modal-box h2 {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 900;
-  font-size: 36px;
+  font-size: 42px;
   letter-spacing: 0.1em;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
-
 #modal-box p {
   color: var(--neutral);
-  font-size: 14px;
-  margin-bottom: 24px;
+  font-size: 15px;
+  margin-bottom: 28px;
+  line-height: 1.6;
 }

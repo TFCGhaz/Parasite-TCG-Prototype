@@ -1,26 +1,40 @@
-/* ════════════════════════════════════════════════════
-   base.css — CSS variables, reset, global styles
-   ════════════════════════════════════════════════════ */
+/* base.css -- CSS variables, reset, global styles */
 
 :root {
-  --bg:        #0a0c10;
-  --surface:   #111420;
-  --panel:     #161b28;
-  --border:    #1e2535;
-  --weave:     #1a7a4a;
-  --weave-lt:  #2dbd72;
+  /* Core surfaces - lifted for readability */
+  --bg:        #0e1118;
+  --surface:   #171d2e;
+  --panel:     #1e2540;
+  --border:    #2d3650;
+
+  /* Weave palette (green) */
+  --weave:     #1e8a52;
+  --weave-lt:  #3dd97f;
   --weave-dk:  #0d3d25;
-  --rem:       #8b1a2a;
-  --rem-lt:    #e8364f;
+  --weave-bg:  #0f1e16;
+
+  /* Remnants palette (red) */
+  --rem:       #a02030;
+  --rem-lt:    #ff4d65;
   --rem-dk:    #3d0d14;
+  --rem-bg:    #1e0f14;
+
+  /* Other factions */
   --sev:       #4a2d8a;
-  --sev-lt:    #8b5cf6;
-  --neutral:   #8892a4;
-  --text:      #c8d4e8;
-  --text-dim:  #5a6678;
-  --corrupt:   #b04020;
-  --corrupt-lt:#ff6040;
-  --gold:      #c8a040;
+  --sev-lt:    #9d72ff;
+
+  /* Text - brighter for readability */
+  --neutral:   #a0aec0;
+  --text:      #e2eaf8;
+  --text-dim:  #6a7a90;
+  --text-label:#8a9db8;
+
+  /* Corruption */
+  --corrupt:   #c04828;
+  --corrupt-lt:#ff6a40;
+
+  /* Accent */
+  --gold:      #dab050;
 }
 
 * {
@@ -39,7 +53,7 @@ body {
   user-select: none;
 }
 
-/* Noise texture overlay */
+/* Subtle noise texture overlay */
 body::before {
   content: '';
   position: fixed;
@@ -47,7 +61,7 @@ body::before {
   pointer-events: none;
   z-index: 999;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  opacity: 0.4;
+  opacity: 0.3;
 }
 
 /* Custom scrollbar */
