@@ -11,6 +11,7 @@ function renderAll() {
   renderCorruption();
   renderPhase();
   renderControls();
+  updateCoach();
 }
 
 // ── Player ────────────────────────────────────────────
@@ -184,6 +185,9 @@ function buildCardEl(cardInst, extraClass, selected, canPlay) {
   tag.className   = 'card-type-tag';
   tag.textContent = def.type.toUpperCase();
   el.appendChild(tag);
+
+  // Attach hover tooltip
+  attachTooltip(el, cardInst);
 
   return el;
 }

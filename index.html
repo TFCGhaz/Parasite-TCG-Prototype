@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PARASITE TCG — Prototype v0.1</title>
+  <title>PARASITE TCG - Prototype v0.1</title>
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/cards.css">
@@ -12,7 +12,7 @@
 </head>
 <body>
 
-  <!-- ── HEADER ── -->
+  <!-- HEADER -->
   <div id="header">
     <div class="logo">PARA<span>SITE</span> TCG</div>
     <div id="turn-info">
@@ -34,23 +34,23 @@
     </div>
   </div>
 
-  <!-- ── GAME WRAP ── -->
+  <!-- GAME WRAP -->
   <div id="game-wrap">
 
-    <!-- PLAYER 2 (TOP) — The Weave -->
+    <!-- PLAYER 2 TOP - The Weave -->
     <div id="player2-area">
       <div class="player-info p2">
-        <div class="player-name">⬡ THE WEAVE</div>
-        <div class="life-display">LIFE<br><span class="life-val" id="p2-life">20</span></div>
-        <div class="resource-display">BIOMASS<br><span class="res-val" id="p2-res">2</span></div>
+        <div class="player-name">THE WEAVE</div>
+        <div class="life-display">LIFE<span class="life-val" id="p2-life">20</span></div>
+        <div class="resource-display">BIOMASS<span class="res-val" id="p2-res">2</span></div>
       </div>
       <div class="hand-zone" id="p2-hand"></div>
       <div class="player-deck-area">
-        <div class="deck-pile" id="p2-deck-pile">
+        <div class="deck-pile">
           <div id="p2-deck-count">--</div>
           <div class="pile-label">Deck</div>
         </div>
-        <div class="deck-pile" id="p2-discard-pile">
+        <div class="deck-pile">
           <div id="p2-discard-count">0</div>
           <div class="pile-label">Discard</div>
         </div>
@@ -68,65 +68,92 @@
       </div>
     </div>
 
-    <!-- PLAYER 1 (BOTTOM) — The Remnants -->
+    <!-- PLAYER 1 BOTTOM - The Remnants -->
     <div id="player1-area">
       <div class="player-info p1">
-        <div class="player-name">⚡ THE REMNANTS</div>
-        <div class="life-display">LIFE<br><span class="life-val" id="p1-life">20</span></div>
-        <div class="resource-display">SCRAP<br><span class="res-val" id="p1-res">2</span></div>
+        <div class="player-name">THE REMNANTS</div>
+        <div class="life-display">LIFE<span class="life-val" id="p1-life">20</span></div>
+        <div class="resource-display">SCRAP<span class="res-val" id="p1-res">2</span></div>
       </div>
       <div class="hand-zone" id="p1-hand"></div>
       <div class="player-deck-area">
-        <div class="deck-pile" id="p1-deck-pile">
+        <div class="deck-pile">
           <div id="p1-deck-count">--</div>
           <div class="pile-label">Deck</div>
         </div>
-        <div class="deck-pile" id="p1-discard-pile">
+        <div class="deck-pile">
           <div id="p1-discard-count">0</div>
           <div class="pile-label">Discard</div>
         </div>
       </div>
     </div>
 
-  </div><!-- /#game-wrap -->
-
-  <!-- ── CONTROLS ── -->
-  <div id="controls">
-    <button class="btn btn-action"  id="btn-play"       disabled>Play Card</button>
-    <button class="btn btn-attack"  id="btn-attack"     disabled>Declare Attack</button>
-    <button class="btn btn-primary" id="btn-cancel"     disabled>Cancel</button>
-    <button class="btn btn-end"     id="btn-end-phase"          >Next Phase →</button>
-    <span id="phase-hint">Select a card in your hand to play it, then press Play Card.</span>
-    <button class="btn btn-tutorial" onclick="window.open('tutorial.html','_blank')">📖 How to Play</button>
   </div>
 
-  <!-- ── COMBAT PENDING NOTICE ── -->
-  <div id="combat-pending">SELECT ATTACKER → then select TARGET</div>
+  <!-- CONTROLS -->
+  <div id="controls">
+    <button class="btn btn-action"   id="btn-play"      disabled>Play Card</button>
+    <button class="btn btn-attack"   id="btn-attack"    disabled>Declare Attack</button>
+    <button class="btn btn-primary"  id="btn-cancel"    disabled>Cancel</button>
+    <button class="btn btn-end"      id="btn-end-phase"         >Next Phase &rarr;</button>
+    <span   id="phase-hint"></span>
+    <button class="btn btn-tutorial" onclick="window.open('tutorial.html','_blank')">How to Play</button>
+  </div>
 
-  <!-- ── ACTION LOG ── -->
+  <!-- COMBAT NOTICE -->
+  <div id="combat-pending">SELECT ATTACKER then select TARGET</div>
+
+  <!-- ACTION LOG -->
   <div id="log-toggle" onclick="toggleLog()">ACTION LOG</div>
   <div id="log-wrap">
     <div id="log-title">Action Log</div>
     <div id="log-entries"></div>
   </div>
 
-  <!-- ── CARD DETAIL PANEL ── -->
+  <!-- CARD DETAIL PANEL (click to pin) -->
   <div id="card-detail">
-    <div class="detail-name"   id="det-name"></div>
-    <div class="detail-type"   id="det-type"></div>
-    <div class="detail-stats"  id="det-stats"></div>
+    <div class="detail-name"    id="det-name"></div>
+    <div class="detail-type"    id="det-type"></div>
+    <div class="detail-stats"   id="det-stats"></div>
     <div class="detail-ability" id="det-ability"></div>
     <div class="detail-flavour" id="det-flavour"></div>
   </div>
 
-  <!-- ── PASS SCREEN ── -->
+  <!-- CARD HOVER TOOLTIP (mouseover, no click needed) -->
+  <div id="card-tooltip">
+    <div class="tip-header">
+      <div class="tip-name"  id="tip-name"></div>
+      <div class="tip-tags"  id="tip-tags"></div>
+      <div class="tip-stats" id="tip-stats"></div>
+    </div>
+    <div class="tip-body">
+      <div class="tip-status"  id="tip-status"></div>
+      <div class="tip-ability" id="tip-ability"></div>
+      <div class="tip-flavour" id="tip-flavour"></div>
+    </div>
+  </div>
+
+  <!-- COACH BUBBLE (toggleable instruction guide) -->
+  <div id="coach-wrap">
+    <div id="coach-bubble">
+      <div id="coach-header">
+        <span id="coach-phase-tag">UPKEEP</span>
+        <button id="coach-dismiss" onclick="dismissCoach()">Hide forever &times;</button>
+      </div>
+      <div id="coach-title"></div>
+      <div id="coach-text"></div>
+    </div>
+  </div>
+  <button id="coach-toggle" onclick="toggleCoach()">Guide</button>
+
+  <!-- PASS SCREEN -->
   <div id="pass-screen">
     <h2 id="pass-title"></h2>
     <p  id="pass-msg"></p>
-    <button class="btn btn-primary" style="font-size:16px;padding:12px 32px;" onclick="dismissPass()">I'M READY →</button>
+    <button class="btn btn-primary" style="font-size:16px;padding:12px 32px;" onclick="dismissPass()">I'M READY &rarr;</button>
   </div>
 
-  <!-- ── WIN MODAL ── -->
+  <!-- WIN MODAL -->
   <div id="modal-overlay">
     <div id="modal-box">
       <h2 id="modal-title"></h2>
@@ -135,7 +162,7 @@
     </div>
   </div>
 
-  <!-- ── SCRIPTS (order matters) ── -->
+  <!-- Scripts - load order matters -->
   <script src="js/cards.js"></script>
   <script src="js/state.js"></script>
   <script src="js/actions.js"></script>

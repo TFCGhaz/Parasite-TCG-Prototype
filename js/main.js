@@ -51,3 +51,4 @@ document.addEventListener('click', () => {
 // ── Start ─────────────────────────────────────────────
 
 initGame();
+initCoach();

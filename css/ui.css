@@ -313,3 +313,229 @@
   margin-bottom: 28px;
   line-height: 1.6;
 }
+
+/* ── CARD HOVER TOOLTIP ── */
+#card-tooltip {
+  position: fixed;
+  width: 220px;
+  background: #1a2038;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0;
+  z-index: 200;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04);
+  overflow: hidden;
+}
+#card-tooltip.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Coloured top strip by faction */
+#card-tooltip .tip-header {
+  padding: 10px 14px 8px;
+  border-bottom: 1px solid var(--border);
+}
+#card-tooltip.tip-weave   .tip-header { background: rgba(30,138,82,0.2); border-bottom-color: rgba(61,217,127,0.2); }
+#card-tooltip.tip-remnants .tip-header { background: rgba(160,32,48,0.2); border-bottom-color: rgba(255,77,101,0.2); }
+
+#card-tooltip .tip-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 17px;
+  letter-spacing: 0.05em;
+  color: #fff;
+  line-height: 1.1;
+}
+#card-tooltip.tip-weave    .tip-name { color: var(--weave-lt); }
+#card-tooltip.tip-remnants .tip-name { color: var(--rem-lt); }
+
+#card-tooltip .tip-tags {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px;
+  color: var(--text-label);
+  letter-spacing: 0.1em;
+  margin-top: 3px;
+  text-transform: uppercase;
+}
+
+#card-tooltip .tip-stats {
+  display: flex;
+  gap: 14px;
+  margin-top: 6px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 13px;
+  font-weight: bold;
+}
+#card-tooltip .tip-atk { color: #ff7088; }
+#card-tooltip .tip-def { color: #60aaff; }
+#card-tooltip .tip-cost {
+  margin-left: auto;
+  color: var(--gold);
+  font-size: 12px;
+}
+
+#card-tooltip .tip-body {
+  padding: 10px 14px 12px;
+}
+#card-tooltip .tip-ability {
+  font-size: 12px;
+  color: var(--text);
+  line-height: 1.55;
+  margin-bottom: 8px;
+}
+#card-tooltip .tip-flavour {
+  font-size: 11px;
+  color: var(--neutral);
+  font-style: italic;
+  line-height: 1.45;
+  border-top: 1px solid var(--border);
+  padding-top: 7px;
+}
+
+/* Growth / infection status inside tooltip */
+#card-tooltip .tip-status {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+#card-tooltip .tip-badge {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  letter-spacing: 0.06em;
+}
+#card-tooltip .tip-badge.growth   { background: rgba(61,217,127,0.15); color: var(--weave-lt); border: 1px solid rgba(61,217,127,0.3); }
+#card-tooltip .tip-badge.infected { background: rgba(61,217,127,0.1);  color: var(--weave-lt); border: 1px solid rgba(61,217,127,0.25); }
+#card-tooltip .tip-badge.exhausted{ background: rgba(100,120,160,0.15); color: var(--text-dim); border: 1px solid var(--border); }
+#card-tooltip .tip-badge.surge    { background: rgba(218,176,80,0.12); color: var(--gold);     border: 1px solid rgba(218,176,80,0.3); }
+
+/* ── COACH BUBBLE ── */
+#coach-wrap {
+  position: fixed;
+  bottom: 66px;        /* sits just above the control bar */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 25;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  pointer-events: none;
+}
+
+#coach-bubble {
+  background: #1c2240;
+  border: 1px solid #3a4870;
+  border-radius: 10px;
+  padding: 14px 18px 12px;
+  max-width: 520px;
+  width: calc(100vw - 340px); /* leave room for log toggle + detail panel */
+  min-width: 280px;
+  pointer-events: all;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+  position: relative;
+}
+
+/* little arrow pointing down toward the control bar */
+#coach-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -7px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 7px;
+  background: #1c2240;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  border-bottom: 1px solid #3a4870;
+}
+
+#coach-bubble.hidden { display: none; }
+
+#coach-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 7px;
+}
+
+#coach-phase-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 3px;
+  background: rgba(218,176,80,0.15);
+  color: var(--gold);
+  border: 1px solid rgba(218,176,80,0.3);
+}
+
+#coach-dismiss {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 2px 8px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  letter-spacing: 0.06em;
+}
+#coach-dismiss:hover { color: var(--text); border-color: var(--neutral); }
+
+#coach-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  color: #fff;
+  letter-spacing: 0.04em;
+  margin-bottom: 5px;
+}
+
+#coach-text {
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  color: var(--neutral);
+  line-height: 1.6;
+}
+#coach-text strong { color: var(--text); font-weight: 600; }
+#coach-text .key {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 6px;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+/* Toggle button (always visible even when bubble is hidden) */
+#coach-toggle {
+  position: fixed;
+  bottom: 64px;
+  right: 30px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  z-index: 26;
+  transition: color 0.2s, border-color 0.2s;
+}
+#coach-toggle:hover { color: var(--text); border-color: var(--neutral); }
+#coach-toggle.coach-on { color: var(--gold); border-color: rgba(218,176,80,0.4); }

@@ -9,6 +9,7 @@ function startCombatPhase() {
   G.combatState = { phase: 'select_attacker', attackerUid: null };
   setCombatNotice('COMBAT: Select one of your units to attack');
   renderAll();
+  updateCoach();
 }
 
 /**
@@ -41,6 +42,7 @@ function handleCombatClick(pnum, uid) {
     G.combatState.phase       = 'select_target';
     setCombatNotice('COMBAT: Select an enemy unit to block, or click "Attack Player"');
     renderAll();
+    updateCoach();
     return;
   }
 
